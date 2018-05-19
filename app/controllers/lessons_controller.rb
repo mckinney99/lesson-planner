@@ -1,0 +1,2 @@
+class LessonsController < ApiController
+end 
