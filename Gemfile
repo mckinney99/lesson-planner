@@ -16,6 +16,7 @@ gem 'puma', '~> 3.11'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'activeadmin'
+# gem 'yarn', '>= 0.1.6'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -46,6 +47,8 @@ end
 group :production do
   gem 'pg'
 end
+
+
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
