@@ -16,7 +16,7 @@ gem 'puma', '~> 3.11'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'activeadmin'
-# gem 'yarn', '>= 0.1.6'
+gem 'rack-cors', require: 'rack/cors'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
