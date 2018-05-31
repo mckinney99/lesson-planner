@@ -3,18 +3,23 @@ import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import LessonForm from '../containers/Lessonform';
 import Navbar from './layout/Navbar';
 
-class NotFound extends Component {
+class MyLessons extends Component {
   render () {
-    return <Container text textAlign='center'>
+    return <Container>
+
+      <Navbar/>
       <Segment>
-        <Navbar/>
-        <h1>404: Not found</h1>
-        <Link to="/">Home</Link>
-      </Segment>
+
+          <LessonForm/>
+        
+      <h1>This is the users lesson show page.</h1>
+    </Segment>
+
     </Container>
   }
 }
 
-export default NotFound
+export default MyLessons

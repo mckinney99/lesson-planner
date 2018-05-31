@@ -5,16 +5,17 @@ import { connect } from 'react-redux';
 
 import Navbar from './layout/Navbar';
 
-class NotFound extends Component {
+class Dashboard extends Component {
   render () {
-    return <Container text textAlign='center'>
+    return <Container>
+      <Navbar/>
       <Segment>
-        <Navbar/>
-        <h1>404: Not found</h1>
-        <Link to="/">Home</Link>
+        <h1>This is the home page.</h1>
       </Segment>
-    </Container>
+
+      </Container>
+
   }
 }
 
-export default NotFound
+export default Dashboard
