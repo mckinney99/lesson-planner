@@ -24,8 +24,8 @@ module LessonPlanner
 
     config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins /\Ahttp:\/\/localhost:\d+\z/
-    resource '*', headers: :any, methods: :any
+    origins 'http://localhost:3000'
+    resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
   end
   end
 

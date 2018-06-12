@@ -1,19 +1,21 @@
-function lessonReducer(state = { lessons: []}, action) {
+export function lessonsHasErrored(state = false, action) {
   switch (action.type) {
-
-    case "REMOVE_LESSON":
-      return Object.assign({}, state, {myLessons: state.myLessons.filter((lesson) => lesson.id !== action.payload)})
-
-    case "FETCHED_LESSONS":
-      return Object.assign({}, state, {myLessons: action.payload, isFetching: false} )
-
-    case "FETCHING_LESSONS":
-      return Object.assign({}, state, { isFetching: true})
-
+    case 'LESSONS_HAS_ERRORED':
+      return action.hasErrored;
+    case 'LESSON_IS_LOADING':
+      return action.isLoading;
     default:
-      return state
+      return state;
   }
 }
 
-
-export default lessonReducer
+export function lessons(state = [], action) {
+  switch (action.type) {
+    case 'LESSONS_FETCH_DATA_SUCCESS':
+      return action.lessons;
+    case 'ADD_LESSON':
+      return state.concat([action.data])
+    default:
+      return state;
+  }
+}

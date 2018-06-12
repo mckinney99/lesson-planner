@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
-import lessonReducer  from './lessonReducer';
-import { connect } from 'react-redux'
+import { combineReducers } from 'redux'
+import { lessons, lessonsHasErrored } from './lessonReducer'
 
 export default combineReducers({
-  lessons: lessonReducer
-});
+  lessons,
+  lessonsHasErrored 
+})

@@ -5,16 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'drummer', password_confirmation: 'drummer')
+AdminUser.create!(email: 'admin@examplesss.com', password: 'password', password_confirmation: 'password')
 
-clay = Lesson.create(
+my_lesson = Lesson.create(
   title: "Kids Clay Project",
   description: "5th grade clay bowls using wheel",
   body: "Seperate clay into 1 pound chunks, give each kid a slab and clay it up!",
   source: "ms. Kedzie"
 )
 
-clay.lesson_settings.create(lesson_id: 1)
-clay.lesson_settings.create(user: "Mr. McKinney")
-clay.lesson_settings.create(grade: 5)
-clay.lesson_settings.create(subject: "art")
+# my_lesson.user_lessons.create(user_id: 1)
+# my_lesson.user_lessons.create(lesson_id: 1)
+# my_lesson.user_lessons.create(class: "Ms. Thomas")
+# my_lesson.user_lessons.create(subject: "art")

@@ -1,7 +1,7 @@
 import React from 'react'
 import { loginUser } from './loginUser'
 import { Redirect, Link } from 'react-router-dom'
-import { Container, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 class Login extends React.Component {
 

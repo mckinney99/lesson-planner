@@ -1,61 +1,83 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createLesson, removeLesson } from '../actions/lessonActions';
+import {connect} from 'react-redux';
+import { lessonsAddData } from '../actions/lessons';
 
-class LessonForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      body: ''
-    };
-  };
+export class LessonForm extends Component {
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.store.dispatch({
-      type: 'NEW_LESSON',
-      lesson: this.state,
-    });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const title = this.getTitle.value;
+    const body =  this.getBody.value;
+    const description = this.getDescription.value;
+    
+    const lesson = {
+        title,
+        body
+    }
+    this.props.lessonsAddData(lesson)
+    this.getTitle.value = '';
+    this.getDescription.value = '';
+    this.getBody.value = '';
+    this.getSource.value = '';
   }
 
   render() {
-    return(
-      <div>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
-    	    <p>
-        	<label>Add Lesson: </label>
-          <input
-            name="title"
-    	      type="text"
-          />
-          <input
-            name="body"
-      	    type="text"
-          />
-          </p>
-          <input type="submit" />
-       </form>
-       {this.state.text}
-     </div>
-   );
-  }
-};
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8 col-md-offset-2">
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                  <div className="form-group" >
+                    <label htmlFor="content" className="col-md-4 control-label">Title</label>
+                    <div className="col-md-5">
+                      <input
+                        required type="text" ref={(input)=>this.getTitle = input}
+                      />
+                    </div>
+                  </div>
 
-function mapDispatchToProps(dispatch) {
-  return {
-    removeLesson: (id) => {
-      dispatch(removeLesson(id))
-    },
+                  <div className="form-group">
+                    <label htmlFor="description" className="col-md-4 control-label">Description</label>
+                    <div className="col-md-5">
+                      <input
+												required rows="5" ref={(input)=>this.getDescription = input}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="body" className="col-md-4 control-label">Body</label>
+                    <div className="col-md-5">
+                      <textarea
+												required rows="5" ref={(input)=>this.getBody = input}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="source" className="col-md-4 control-label">Source</label>
+                    <div className="col-md-5">
+                      <input
+												required rows="5" ref={(input)=>this.getSource = input}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="col-md-6 col-md-offset-4">
+                      <button type="submit" className="btn btn-default">Add</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    lessons: state.lessons
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LessonForm)
+export default connect(null, { lessonsAddData })(LessonForm);

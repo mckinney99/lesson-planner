@@ -1,2 +1,0 @@
-class LessonSettingsController < ApplicationController
-end

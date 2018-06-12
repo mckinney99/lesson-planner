@@ -12,20 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2018_05_21_214848) do
 
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string "namespace"
-    t.text "body"
-    t.string "resource_type"
-    t.integer "resource_id"
-    t.string "author_type"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
-  end
-
   create_table "admin_users", force: :cascade do |t|
     t.string "prefix"
     t.string "last_name"
@@ -45,21 +31,20 @@ ActiveRecord::Schema.define(version: 2018_05_21_214848) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "lesson_settings", force: :cascade do |t|
-    t.integer "lesson_id"
-    t.string "user"
-    t.integer "grade"
-    t.string "subject"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_lesson_settings_on_lesson_id"
-  end
-
   create_table "lessons", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.string "body"
     t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_lessons", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "lesson_id"
+    t.string "class"
+    t.string "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -4,7 +4,6 @@ class LessonsController < ApiController
   # GET /lessons
   def index
     @lessons = Lesson.all
-
     render json: @lessons
   end
 
@@ -16,7 +15,6 @@ class LessonsController < ApiController
   # POST /lessons
   def create
     @lesson = Lesson.new(lesson_params)
-
     if @lesson.save
       render json: @lesson, status: :created, location: @lesson
     else

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
+// import { connect } from 'react-redux';
 
 import Navbar from './layout/Navbar';
 
