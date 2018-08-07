@@ -1,4 +1,5 @@
-export function lessonsHasErrored(state = false, action) {
+export function lessonsHasErrored(state = {
+}, action) {
   switch (action.type) {
     case 'LESSONS_HAS_ERRORED':
       return action.hasErrored;
@@ -9,7 +10,10 @@ export function lessonsHasErrored(state = false, action) {
   }
 }
 
-export function lessons(state = [], action) {
+export function lessons(state = {
+  lessons: [],
+},
+  action) {
   switch (action.type) {
     case 'LESSONS_FETCH_DATA_SUCCESS':
       return action.lessons;

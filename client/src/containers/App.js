@@ -12,26 +12,34 @@ import MySchedule from '../components/MySchedule';
 import NotFound from '../components/NotFound';
 import Login from '../components/users/login';
 import Signup from '../components/users/signup';
+import Lessons from './Lessons';
+import LessonForm from './LessonForm';
+
 
 class App extends Component {
   render() {
   return (
-    <Router>
-      <div>
-        <Switch>
 
-          <Route exact path="/" component={Dashboard}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/signup" component={Signup}/>
-          <Route exact path="/mylessons" component={MyLessons}/>
-          <Route exact path="/mylessons/:lessonId" component={MyLesson}/>
-          <Route exact path="/myschedule" component={MySchedule}/>
-          <Route path="*" component={NotFound}/>
+    <div className="App">
+      <LessonForm store={this.props.store} />
+      <Lessons store={this.props.store} />
+      <Router>
+        <div>
+          <Switch>
 
-        </Switch>
-      </div>
-    </Router>
+            <Route exact path="/" component={Dashboard}/>
+            <Route exact path="/dashboard" component={Dashboard}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/signup" component={Signup}/>
+            <Route exact path="/mylessons" component={MyLessons}/>
+            <Route exact path="/mylessons/:lessonId" component={MyLesson}/>
+            <Route exact path="/myschedule" component={MySchedule}/>
+            <Route path="*" component={NotFound}/>
+
+          </Switch>
+        </div>
+      </Router>
+    </div>
   );
 };
 }

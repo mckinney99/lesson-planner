@@ -1,44 +1,31 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { lessonsAddData } from '../actions/lessons';
+import {lesson} from './Lesson';
 
-// export class LessonForm extends Component {
-//
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     const title = this.getTitle.value;
-//     const body =  this.getBody.value;
-//     const description = this.getDescription.value;
-//
-//     const lesson = {
-//         title,
-//         body
-//     }
-//     this.props.lessonsAddData(lesson)
-//     this.getTitle.value = '';
-//     this.getDescription.value = '';
-//     this.getBody.value = '';
-//     this.getSource.value = '';
-//   }
-
-export class LessonForm extends Component {
+class LessonForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: '',
-      description: '',
-      body: '',
-      source: ''
-    }
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === target.value;
-    const name = target.name;
 
+    this.state = {
+      name: ''
+    };
+  }
+
+  handleChange(event) {
     this.setState({
-      [name]: value
+      name: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.store.dispatch({
+      type: 'ADD_LESSON',
+      addlesson: this.state,
+    });
+    this.setState({
+      name: '',
     });
   }
 
@@ -50,17 +37,18 @@ export class LessonForm extends Component {
           <div className="col-md-8 col-md-offset-2">
             <div className="panel panel-default">
               <div className="panel-body">
-                <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                <form className="form-horizontal" onSubmit={(event) => this.handleSubmit(event)}>
                   <div className="form-group" >
                     <label htmlFor="content" className="col-md-4 control-label">Title</label>
                     <div className="col-md-5">
                       <input
-                        required type="text" onChange={this.handleInputChange}
-                      />
+                        required type="text"
+                        value={this.state.text}
+                        onChange={(event) => this.handleChange(event)} />
                     </div>
                   </div>
 
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label htmlFor="description" className="col-md-4 control-label">Description</label>
                     <div className="col-md-5">
                       <input
@@ -85,7 +73,7 @@ export class LessonForm extends Component {
 												required rows="5" onChange={this.handleInputChange}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="form-group">
                     <div className="col-md-6 col-md-offset-4">
