@@ -11,7 +11,14 @@ my_lesson = Lesson.create(
   title: "Kids Clay Project",
   description: "5th grade clay bowls using wheel",
   body: "Seperate clay into 1 pound chunks, give each kid a slab and clay it up!",
-  source: "ms. Kedzie"
+  source: "Ms. Kedzie"
+)
+
+Lesson.create(
+  title: "lesson title2",
+  description: "7th grade paper paint",
+  body: "paint on paper. woo!",
+  source: "Mr. Anderson"
 )
 
 # my_lesson.user_lessons.create(user_id: 1)
