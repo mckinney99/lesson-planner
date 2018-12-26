@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 
+const apiLink = "http://localhost:3001";
+
 class Home extends Component {
   constructor (props) {
     super(props)
@@ -14,6 +16,7 @@ class Home extends Component {
     this.getLesson = this.getLesson.bind(this)
   }
 
+
   componentDidMount () {
     this.getLessons()
   }
@@ -25,19 +28,22 @@ class Home extends Component {
   }
 
   getLessons () {
-    this.fetch('/api/lessons')
+    console.log(this)
+    this.fetch(apiLink + '/api/lessons')
       .then(lessons => {
         if (lessons.length) {
           this.setState({lessons: lessons})
           this.getLesson(lessons[0].id)
         } else {
+          console.log(this)
           this.setState({lessons: []})
         }
       })
   }
 
-  getLesson (id) {
-    this.fetch(`/api/lessons/${id}`)
+  getLesson(id) {
+
+    this.fetch(apiLink + `/api/lessons/${id}`)
       .then(lesson => this.setState({lesson: lesson}))
   }
 
@@ -82,7 +88,7 @@ class Home extends Component {
     .then(response => response.json())
     .catch(error => this.setState({
       error:true
-    })}
+    }))}
 
 
 
@@ -100,7 +106,7 @@ class Home extends Component {
         </Header>
 
         <Divider section />
-        {lesson &&
+        {lesson && lessons &&
           <Container>
             <Header as='h2'>{lesson.title}</Header>
             {lesson.description && <p>{lesson.description}</p>}
