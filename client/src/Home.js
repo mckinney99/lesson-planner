@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
+import './index.css'
+// import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 
 const apiLink = "http://localhost:3001";
 
@@ -10,15 +11,18 @@ class Home extends Component {
       lessonTitle: '',
       lessonDescription: '',
       lessonBody: '',
-      lessonSource: ''
+      lessonSource: '',
+      lessons: []
     }
     this.getLessons = this.getLessons.bind(this)
     this.getLesson = this.getLesson.bind(this)
   }
 
-
   componentDidMount () {
     this.getLessons()
+    fetch(apiLink + '/api/lessons')
+    .then(res => res.json())
+    .then(lessonsFromServer => this.setState({lessons: lessonsFromServer}))
   }
 
   fetch (endpoint) {
@@ -75,7 +79,12 @@ class Home extends Component {
     })
   }
 
-  handleLessonSubmit(){
+
+
+  handleLessonSubmit(event){
+    //debugger
+    event.preventDefault();
+    console.log("submitting lesson")
     const lesson = JSON.stringify({lesson: { title: this.state.lessonTitle, description: this.state.lessonDescription, body: this.state.lessonBody, source: this.state.lessonSource}})
     fetch('http://localhost:3001/api/lessons',{
       method: 'POST',
@@ -86,57 +95,120 @@ class Home extends Component {
       body: lesson
     }).then(this.handleErrors)
     .then(response => response.json())
-    .catch(error => this.setState({
-      error:true
-    }))}
 
+    .then(lessons => this.setState({lesson}))
+    console.log(this.state.lesson)
+
+    // figure out how to add the new lesson above to the current state of lessons in this component
+
+  }
+
+  // handleLessonSubmit(event){
+  //   //debugger
+  //   event.preventDefault();
+  //   console.log("submitting lesson")
+  //   const lesson = JSON.stringify({lesson: { title: this.state.lessonTitle, description: this.state.lessonDescription, body: this.state.lessonBody, source: this.state.lessonSource}})
+  //   fetch('http://localhost:3001/api/lessons',{
+  //     method: 'POST',
+  //     headers: {
+  //   'Accept': 'application/json, text/plain, */*',
+  //   'Content-Type': 'application/json'
+  //     },
+  //     body: lesson
+  //   })
+  //   .then(response => response.json())
+  //
+  //     if (this.refs.id.value ===''){
+  //         alert('Add lesson');
+  //     } else {
+  //       this.setState({
+  //          lesson : this.refs.id.value
+  //       },function(){
+  //     this.props.lessons(this.state)
+  //       })
+  //     }
+  //
+  //   .then(lessons => this.setState({lesson}))
+  //
 
 
 
   render () {
-    let {lessons, lesson} = this.state
-    return lessons
-      ?
-      <Container text>
-        <Header as='h2' icon textAlign='center' color='teal'>
-          <Icon name='unordered list' circular />
-          <Header.Content>
-            List of Lessons
-          </Header.Content>
-        </Header>
+    // let {lessons, lesson} = this.state
+    // return lessons
+    //   ?
+    //   <Container text>
+    //     <Header as='h2' icon textAlign='center' color='teal'>
+    //       <Icon name='unordered list' circular />
+    //       <Header.Content>
+    //         List of Lessons
+    //       </Header.Content>
+    //     </Header>
+    //
+    //     <Divider section />
+    //     {lesson && lessons &&
+    //       <Container>
+    //         <Header as='h2'>{lesson.title}</Header>
+    //         {lesson.description && <p>{lesson.description}</p>}
+    //         {lesson.source && <Button basic size='tiny' color='teal' href={lesson.source}>Source</Button>}
+    //       </Container>}
+    //
+    //       <form className='new-lesson-form'>
+    //         <div className='form-group'>
+    //           <input type='text' placeholder='Lesson Name' ref='lesson-title' onChange={(i)=> this.handleOnLessonTitleChange(i)} value={this.state.lessonTitle}></input>
+    //         </div>
+    //         <div className='form-group'>
+    //           <input type='text' placeholder='Lesson Description' onChange={(i)=> this.handleOnLessonDescriptionChange(i)} value={this.state.lessonDescription}></input>
+    //         </div>
+    //         <div className='form-group'>
+    //           <input type='text' placeholder='Lesson Body' onChange={(i)=> this.handleOnLessonBodyChange(i)} value={this.state.lessonBody}></input>
+    //         </div>
+    //         <div className='form-group'>
+    //           <input type='text' placeholder='Lesson Source' onChange={(i)=> this.handleOnLessonSourceChange(i)} value={this.state.lessonSource}></input>
+    //         </div>
+    //         <div className='button' onClick={()=> this.handleLessonSubmit()}>
+    //           <Button basic size='tiny' color='black'>Submit</Button>
+    //         </div>
+    //       </form>
+    //
+    //   </Container>
+    //   : <Container text>
+    //     <Dimmer active inverted>
+    //       <Loader content='Loading' />
+    //     </Dimmer>
+    //   </Container>
 
-        <Divider section />
-        {lesson && lessons &&
-          <Container>
-            <Header as='h2'>{lesson.title}</Header>
-            {lesson.description && <p>{lesson.description}</p>}
-            {lesson.source && <Button basic size='tiny' color='teal' href={lesson.source}>Source</Button>}
-          </Container>}
+     let {lessons, lesson} = this.state
+    return (
+      <div>
 
-          <form className='new-lesson-form'>
-            <div className='form-group'>
-              <input type='text' placeholder='Lesson Name' ref='lesson-title' onChange={(i)=> this.handleOnLessonTitleChange(i)} value={this.state.lessonTitle}></input>
-            </div>
-            <div className='form-group'>
-              <input type='text' placeholder='Lesson Description' onChange={(i)=> this.handleOnLessonDescriptionChange(i)} value={this.state.lessonDescription}></input>
-            </div>
-            <div className='form-group'>
-              <input type='text' placeholder='Lesson Body' onChange={(i)=> this.handleOnLessonBodyChange(i)} value={this.state.lessonBody}></input>
-            </div>
-            <div className='form-group'>
-              <input type='text' placeholder='Lesson Source' onChange={(i)=> this.handleOnLessonSourceChange(i)} value={this.state.lessonSource}></input>
-            </div>
-            <div className='button' onClick={()=> this.handleLessonSubmit()}>
-              <Button basic size='tiny' color='black'>Submit</Button>
-            </div>
-          </form>
+      <div className='main-content-wrap'>
 
-      </Container>
-      : <Container text>
-        <Dimmer active inverted>
-          <Loader content='Loading' />
-        </Dimmer>
-      </Container>
+        <div className='header'>
+              {this.state.lessons.map(lesson => <p>{lesson.title}</p>)}
+        </div>
+
+        <form onSubmit={(event)=>  this.handleLessonSubmit(event)} className='new-lesson-form'>
+          <div className='form-group'>
+            <input type='text' placeholder='Lesson Name' ref='lesson-title' onChange={(i)=> this.handleOnLessonTitleChange(i)} value={this.state.lessonTitle}></input>
+          </div>
+          <div className='form-group'>
+            <input type='text' placeholder='Lesson Description' onChange={(i)=> this.handleOnLessonDescriptionChange(i)} value={this.state.lessonDescription}></input>
+          </div>
+          <div className='form-group'>
+            <input type='text' placeholder='Lesson Body' onChange={(i)=> this.handleOnLessonBodyChange(i)} value={this.state.lessonBody}></input>
+          </div>
+          <div className='form-group'>
+            <input type='text' placeholder='Lesson Source' onChange={(i)=> this.handleOnLessonSourceChange(i)} value={this.state.lessonSource}></input>
+          </div>
+          <div className='submit-button' >
+            <button>Submit</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    )
   }
 }
 
