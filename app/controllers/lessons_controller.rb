@@ -34,6 +34,7 @@ class LessonsController < ApiController
   # DELETE /lessons/1
   def destroy
     @lesson.destroy
+    render json: @lesson 
   end
 
   private

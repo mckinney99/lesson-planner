@@ -1,215 +1,180 @@
-import React, { Component } from 'react'
-import './index.css'
-// import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import './index.css';
+import {Form, FormControl, Nav, Navbar, NavDropdown, Col, Row, Container, Button} from 'react-bootstrap'
+
+
+import { Link } from 'react-router-dom'
+import { getLessons, createLesson, deleteLesson} from './actions'
 
 const apiLink = "http://localhost:3001";
 
 class Home extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
+  state = {
+    lessons: [],
+    lessonTitle: '',
+    lessonDescription: '',
+    lessonBody: '',
+    lessonSource: '',
+    lessonGrade: ''
+  }
+
+    // onChange(e){
+    //   let lesson = {}
+    //   lesson[e.target.name] = e.target.value
+    //   this.setState(lesson)
+    // }
+
+    handleOnChange(e){
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+
+    clickButton = () => {
+      console.log('clicked the button')
+    }
+
+  handleLessonSubmit(event) {
+    event.preventDefault();
+    console.log("submitting lesson")
+      const lesson = JSON.stringify({lesson: {
+        title: this.state.lessonTitle,
+        description: this.state.lessonDescription,
+        body: this.state.lessonBody,
+        source: this.state.lessonSource,
+        grade: this.state.grade
+      }
+      })
+      this.props.createLesson(lesson)
+      this.setState({
       lessonTitle: '',
       lessonDescription: '',
       lessonBody: '',
       lessonSource: '',
-      lessons: []
+      lessonGrade: ''
+    })
     }
-    this.getLessons = this.getLessons.bind(this)
-    this.getLesson = this.getLesson.bind(this)
+
+  handleDelete = (id) => {
+    this.props.deleteLesson(id)
   }
 
-  componentDidMount () {
-    this.getLessons()
-    fetch(apiLink + '/api/lessons')
-    .then(res => res.json())
-    .then(lessonsFromServer => this.setState({lessons: lessonsFromServer}))
-  }
-
-  fetch (endpoint) {
-    return window.fetch(endpoint)
-      .then(response => response.json())
-      .catch(error => console.log(error))
-  }
-
-  getLessons () {
-    console.log(this)
-    this.fetch(apiLink + '/api/lessons')
-      .then(lessons => {
-        if (lessons.length) {
-          this.setState({lessons: lessons})
-          this.getLesson(lessons[0].id)
-        } else {
-          console.log(this)
-          this.setState({lessons: []})
-        }
-      })
-  }
-
-  getLesson(id) {
-
-    this.fetch(apiLink + `/api/lessons/${id}`)
-      .then(lesson => this.setState({lesson: lesson}))
-  }
-
-  handleOnLessonTitleChange(i){
-    console.log(i.target.value)
-    this.setState({
-      lessonTitle: i.target.value
-    })
-  }
-
-  handleOnLessonDescriptionChange(i){
-    console.log(i.target.value)
-    this.setState({
-      lessonDescription: i.target.value
-    })
-  }
-
-  handleOnLessonBodyChange(i){
-    console.log(i.target.value)
-    this.setState({
-      lessonBody: i.target.value
-    })
-  }
-
-  handleOnLessonSourceChange(i){
-    console.log(i.target.value)
-    this.setState({
-      lessonSource: i.target.value
-    })
-  }
+  render() {
 
 
-
-  handleLessonSubmit(event){
-    //debugger
-    event.preventDefault();
-    console.log("submitting lesson")
-    const lesson = JSON.stringify({lesson: { title: this.state.lessonTitle, description: this.state.lessonDescription, body: this.state.lessonBody, source: this.state.lessonSource}})
-    fetch('http://localhost:3001/api/lessons',{
-      method: 'POST',
-      headers: {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json'
-      },
-      body: lesson
-    }).then(this.handleErrors)
-    .then(response => response.json())
-
-    .then(lessons => this.setState({lesson}))
-    console.log(this.state.lesson)
-
-    // figure out how to add the new lesson above to the current state of lessons in this component
-
-  }
-
-  // handleLessonSubmit(event){
-  //   //debugger
-  //   event.preventDefault();
-  //   console.log("submitting lesson")
-  //   const lesson = JSON.stringify({lesson: { title: this.state.lessonTitle, description: this.state.lessonDescription, body: this.state.lessonBody, source: this.state.lessonSource}})
-  //   fetch('http://localhost:3001/api/lessons',{
-  //     method: 'POST',
-  //     headers: {
-  //   'Accept': 'application/json, text/plain, */*',
-  //   'Content-Type': 'application/json'
-  //     },
-  //     body: lesson
-  //   })
-  //   .then(response => response.json())
-  //
-  //     if (this.refs.id.value ===''){
-  //         alert('Add lesson');
-  //     } else {
-  //       this.setState({
-  //          lesson : this.refs.id.value
-  //       },function(){
-  //     this.props.lessons(this.state)
-  //       })
-  //     }
-  //
-  //   .then(lessons => this.setState({lesson}))
-  //
-
-
-
-  render () {
-    // let {lessons, lesson} = this.state
-    // return lessons
-    //   ?
-    //   <Container text>
-    //     <Header as='h2' icon textAlign='center' color='teal'>
-    //       <Icon name='unordered list' circular />
-    //       <Header.Content>
-    //         List of Lessons
-    //       </Header.Content>
-    //     </Header>
-    //
-    //     <Divider section />
-    //     {lesson && lessons &&
-    //       <Container>
-    //         <Header as='h2'>{lesson.title}</Header>
-    //         {lesson.description && <p>{lesson.description}</p>}
-    //         {lesson.source && <Button basic size='tiny' color='teal' href={lesson.source}>Source</Button>}
-    //       </Container>}
-    //
-    //       <form className='new-lesson-form'>
-    //         <div className='form-group'>
-    //           <input type='text' placeholder='Lesson Name' ref='lesson-title' onChange={(i)=> this.handleOnLessonTitleChange(i)} value={this.state.lessonTitle}></input>
-    //         </div>
-    //         <div className='form-group'>
-    //           <input type='text' placeholder='Lesson Description' onChange={(i)=> this.handleOnLessonDescriptionChange(i)} value={this.state.lessonDescription}></input>
-    //         </div>
-    //         <div className='form-group'>
-    //           <input type='text' placeholder='Lesson Body' onChange={(i)=> this.handleOnLessonBodyChange(i)} value={this.state.lessonBody}></input>
-    //         </div>
-    //         <div className='form-group'>
-    //           <input type='text' placeholder='Lesson Source' onChange={(i)=> this.handleOnLessonSourceChange(i)} value={this.state.lessonSource}></input>
-    //         </div>
-    //         <div className='button' onClick={()=> this.handleLessonSubmit()}>
-    //           <Button basic size='tiny' color='black'>Submit</Button>
-    //         </div>
-    //       </form>
-    //
-    //   </Container>
-    //   : <Container text>
-    //     <Dimmer active inverted>
-    //       <Loader content='Loading' />
-    //     </Dimmer>
-    //   </Container>
-
-     let {lessons, lesson} = this.state
     return (
-      <div>
+      <Container className='main'>
 
-      <div className='main-content-wrap'>
+        <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">Teacher Lesson Planner</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#link">My Lessons</Nav.Link>
+            <NavDropdown title="Lesson Plans" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Science</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Math</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Art</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">English</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.5">History</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.6">Music</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Select By Grade</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
 
-        <div className='header'>
-              {this.state.lessons.map(lesson => <p>{lesson.title}</p>)}
-        </div>
+            <Link to={`/lessons/new`}>
+            <Button variant="outline-success">New Lesson</Button>
+          </Link>
 
-        <form onSubmit={(event)=>  this.handleLessonSubmit(event)} className='new-lesson-form'>
-          <div className='form-group'>
-            <input type='text' placeholder='Lesson Name' ref='lesson-title' onChange={(i)=> this.handleOnLessonTitleChange(i)} value={this.state.lessonTitle}></input>
-          </div>
-          <div className='form-group'>
-            <input type='text' placeholder='Lesson Description' onChange={(i)=> this.handleOnLessonDescriptionChange(i)} value={this.state.lessonDescription}></input>
-          </div>
-          <div className='form-group'>
-            <input type='text' placeholder='Lesson Body' onChange={(i)=> this.handleOnLessonBodyChange(i)} value={this.state.lessonBody}></input>
-          </div>
-          <div className='form-group'>
-            <input type='text' placeholder='Lesson Source' onChange={(i)=> this.handleOnLessonSourceChange(i)} value={this.state.lessonSource}></input>
-          </div>
-          <div className='submit-button' >
-            <button>Submit</button>
-          </div>
-        </form>
+        </Navbar.Collapse>
+      </Navbar>
 
-      </div>
-    </div>
+      <Container className='lessons'>
+        <Row>
+          <Col md={12}>
+              <div className='header'>
+                    {this.props.lessons.map(lesson => (
+                      <div>
+                        <p>Lesson Title: <Link to={`/lessons/${lesson.id}`}>{lesson.title}</Link></p>
+                        <Button
+                          onClick={()=>this.handleDelete(lesson.id)}>x</Button>
+                      </div>)
+                    )}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+
+        <Container className="lesson-form">
+          <Row>
+            <Col>
+
+
+              <form
+                onSubmit={(event)=>  this.handleLessonSubmit(event)}
+                className='new-lesson-form'>
+
+                <div className='form-group center-block' >
+                  <input
+                    type='text'
+                    placeholder='Lesson Name'
+                    name='lessonTitle'
+                    onChange={(i)=> {this.handleOnChange(i)}}
+                    value={this.state.lessonTitle}></input>
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Lesson Description'
+                    name='lessonDescription'
+                    onChange={(i)=> {this.handleOnChange(i)}}
+                    value={this.state.lessonDescription}></input>
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Lesson Body'
+                    name='lessonBody'
+                    onChange={(i)=> {this.handleOnChange(i)}}
+                    value={this.state.lessonBody}></input>
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Lesson Source'
+                    name='lessonSource'
+                    onChange={(i)=> {this.handleOnChange(i)}}
+                    value={this.state.lessonSource}></input>
+                </div>
+                <div className='form-group'>
+                  <select value={this.state.value} onChange={this.handleChange}>
+                    <option value="grapefruit">Grapefruit</option>
+                    <option value="lime">Lime</option>
+                    <option value="coconut">Coconut</option>
+                    <option value="mango">Mango</option>
+                  </select>
+                </div>
+
+                <div className='submit-button' >
+                  <Button type='submit' variant="outline-dark"> Submit </Button>
+                </div>
+              </form>
+
+          </Col>
+        </Row>
+      </Container>
+    </Container>
     )
   }
 }
 
-export default Home
+const mapStateToProps = function(state){
+  return {
+    lessons: state.lessons
+  }
+}
+
+export default connect(mapStateToProps, {getLessons, createLesson, deleteLesson})(Home)
