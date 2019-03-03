@@ -7,10 +7,19 @@ class ArtPage extends Component {
     return (
       <div>
         <h1>Art Page</h1>
+        <ul>
+          {this.props.lessons.map(l => <li>{l.title}</li>)}
+        </ul>
       </div>
-
     )
   }
 }
 
-export default(ArtPage)
+const mapStateToProps = function(state){
+  const artLessons = state.lessons.filter(l => l.subject == 'art')
+  return {
+    lessons: artLessons
+  }
+}
+
+export default connect(mapStateToProps)(ArtPage)

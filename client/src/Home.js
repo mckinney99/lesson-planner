@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import './index.css';
 import {Form, FormControl, Nav, Navbar, NavDropdown, Col, Row, Container, Button} from 'react-bootstrap'
 
-
 import { Link } from 'react-router-dom'
 import { getLessons, createLesson, deleteLesson} from './actions'
 
@@ -16,14 +15,9 @@ class Home extends Component {
     lessonDescription: '',
     lessonBody: '',
     lessonSource: '',
-    lessonGrade: ''
+    lessonGrade: '',
+    lessonSubject: ''
   }
-
-    // onChange(e){
-    //   let lesson = {}
-    //   lesson[e.target.name] = e.target.value
-    //   this.setState(lesson)
-    // }
 
     handleOnChange(e){
       this.setState({
@@ -43,16 +37,19 @@ class Home extends Component {
         description: this.state.lessonDescription,
         body: this.state.lessonBody,
         source: this.state.lessonSource,
-        grade: this.state.grade
+        grade: this.state.lessonGrade,
+        subject: this.state.lessonSubject
       }
       })
+      console.log(lesson)
       this.props.createLesson(lesson)
       this.setState({
       lessonTitle: '',
       lessonDescription: '',
       lessonBody: '',
       lessonSource: '',
-      lessonGrade: ''
+      lessonGrade: '',
+      lessonSubject: ''
     })
     }
 
@@ -61,37 +58,8 @@ class Home extends Component {
   }
 
   render() {
-
-
     return (
-      <Container className='main'>
-
-        <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Teacher Lesson Planner</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">My Lessons</Nav.Link>
-            <NavDropdown title="Lesson Plans" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Science</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Math</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Art</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">English</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.5">History</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.6">Music</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Select By Grade</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-
-            <Link to={`/lessons/new`}>
-            <Button variant="outline-success">New Lesson</Button>
-          </Link>
-
-        </Navbar.Collapse>
-      </Navbar>
-
+      <div>
       <Container className='lessons'>
         <Row>
           <Col md={12}>
@@ -150,11 +118,13 @@ class Home extends Component {
                     value={this.state.lessonSource}></input>
                 </div>
                 <div className='form-group'>
-                  <select value={this.state.value} onChange={this.handleChange}>
-                    <option value="grapefruit">Grapefruit</option>
-                    <option value="lime">Lime</option>
-                    <option value="coconut">Coconut</option>
-                    <option value="mango">Mango</option>
+                  <select name='lessonSubject' value={this.state.lessonSubject} onChange={(i)=> {this.handleOnChange(i)}}>
+                    <option value="science">Science</option>
+                    <option value="math">Math</option>
+                    <option value="art">Art</option>
+                    <option value="english">English</option>
+                    <option value="history">History</option>
+                    <option value="music">Music</option>
                   </select>
                 </div>
 
@@ -166,7 +136,7 @@ class Home extends Component {
           </Col>
         </Row>
       </Container>
-    </Container>
+    </div>
     )
   }
 }

@@ -7,10 +7,19 @@ class MathPage extends Component {
     return (
       <div>
         <h1>Math Page</h1>
+        <ul>
+          {this.props.lessons.map(l => <li>{l.title}</li>)}
+        </ul>
       </div>
-
     )
   }
 }
 
-export default(MathPage)
+const mapStateToProps = function(state){
+  const mathLessons = state.lessons.filter(l => l.subject == 'math')
+  return {
+    lessons: mathLessons
+  }
+}
+
+export default connect(mapStateToProps)(MathPage)

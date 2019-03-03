@@ -34,7 +34,7 @@ class LessonsController < ApiController
   # DELETE /lessons/1
   def destroy
     @lesson.destroy
-    render json: @lesson 
+    render json: @lesson
   end
 
   private
@@ -45,6 +45,6 @@ class LessonsController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def lesson_params
-      params.require(:lesson).permit(:title, :description, :body, :source)
+      params.require(:lesson).permit(:title, :description, :body,  :source, :subject)
     end
 end

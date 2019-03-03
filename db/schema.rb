@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_214848) do
+ActiveRecord::Schema.define(version: 2019_02_26_222636) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "prefix"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_214848) do
     t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subject"
   end
 
   create_table "user_lessons", force: :cascade do |t|

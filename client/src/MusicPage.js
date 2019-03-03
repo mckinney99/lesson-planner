@@ -7,10 +7,20 @@ class MusicPage extends Component {
     return (
       <div>
         <h1>Music Page</h1>
+        <ul>
+          {this.props.lessons.map(l => <li>{l.title}</li>)}
+        </ul>
       </div>
 
     )
   }
 }
 
-export default(MusicPage)
+const mapStateToProps = function(state){
+  const musicLessons = state.lessons.filter(l => l.subject == 'music')
+  return {
+    lessons: musicLessons
+  }
+}
+
+export default connect(mapStateToProps)(MusicPage)

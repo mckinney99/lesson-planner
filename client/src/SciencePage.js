@@ -7,10 +7,19 @@ class SciencePage extends Component {
     return (
       <div>
         <h1>Science Page</h1>
+        <ul>
+          {this.props.lessons.map(l => <li>{l.title}</li>)}
+        </ul>
       </div>
-
     )
   }
 }
 
-export default(SciencePage)
+const mapStateToProps = function(state){
+  const scienceLessons = state.lessons.filter(l => l.subject == 'science')
+  return {
+    lessons: scienceLessons
+  }
+}
+
+export default connect(mapStateToProps)(SciencePage)

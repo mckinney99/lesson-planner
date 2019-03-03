@@ -5,7 +5,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import 'semantic-ui-css/semantic.css'
 import './index.css';
 import App from './App';
 import {Provider} from 'react-redux';

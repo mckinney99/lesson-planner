@@ -7,9 +7,19 @@ class EnglishPage extends Component {
     return (
       <div>
         <h1>English Page</h1>
+        <ul>
+          {this.props.lessons.map(l => <li>{l.title}</li>)}
+        </ul>
       </div>
     )
   }
 }
 
-export default(EnglishPage)
+const mapStateToProps = function(state){
+  const englishLessons = state.lessons.filter(l => l.subject == 'english')
+  return {
+    lessons: englishLessons
+  }
+}
+
+export default connect(mapStateToProps)(EnglishPage)
