@@ -45,6 +45,6 @@ class LessonsController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def lesson_params
-      params.require(:lesson).permit(:title, :description, :body,  :source, :subject)
+      params.require(:lesson).permit(:title, :description, :body,  :source, :subject, :grade)
     end
 end

@@ -9,6 +9,20 @@
 } */
 
 .lessons {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 20px 20px 20px;
+}
+
+/* .lesson-form {
+  padding: 20px 20px 20px 20px;
+} */
+
+.front-page-text {
+  font-style: 'italic';
+  padding: 100px;
+  margin: auto;
+  width: 50%;
+}
+
+.new-lesson-form {
+  padding: 20px;
 }

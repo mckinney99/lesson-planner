@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import './index.css';
-import {Nav, Navbar, NavDropdown, Col, Row, Container, Button} from 'react-bootstrap'
+import {Nav, Navbar, NavDropdown, Col, Row, Container, Button, Form, DropdownButton, Dropdown} from 'react-bootstrap'
+import LessonForm from './LessonForm';
 import { Link } from 'react-router-dom'
 
 class Navigation extends Component {
@@ -10,12 +11,10 @@ class Navigation extends Component {
     return (
 
       <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#home">Teacher Lesson Planner</Navbar.Brand>
+      <Navbar.Brand href="/">Teacher Lesson Planner</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="#link">My Lessons</Nav.Link>
+          <Nav.Link href="/lessons">My Lessons</Nav.Link>
           <NavDropdown title="Lesson Plans" id="basic-nav-dropdown">
             <NavDropdown.Item href="/lessons/science">Science</NavDropdown.Item>
             <NavDropdown.Item href="/lessons/math">Math</NavDropdown.Item>
@@ -28,11 +27,14 @@ class Navigation extends Component {
           </NavDropdown>
         </Nav>
 
-          <Link to={`/lessons/new`}>
-          <Button variant="outline-success">New Lesson</Button>
-        </Link>
+        <DropdownButton
+          alignRight
+          title="New Lesson"
+          id="dropdown-menu-align-right">
+              <LessonForm id="dropdown-lesson-form"/>
+          </DropdownButton>
 
-      </Navbar.Collapse>
+
     </Navbar>
     )
   }
