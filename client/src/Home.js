@@ -11,11 +11,11 @@ const apiLink = "http://localhost:3001";
 class Home extends Component {
   render() {
     return (
-      <div>
+      <Container>
         <div className="front-page-text">
-          <h1>A Place to Share and Organize Lesson Plans</h1>
+          <h1> A Place to Share + Organize Lesson Plans</h1>
         </div>
-      </div>
+      </Container>
     )
   }
 }

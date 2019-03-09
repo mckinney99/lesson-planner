@@ -9,12 +9,10 @@ class GradePage extends Component {
   render() {
     return (
       <div>
-        <div className="front-page-text">
           <h1>Grade {this.props.grade}'s lessons</h1>
           <ul>
             {this.props.lessons.map(l => <li>{l.title}</li>)}
           </ul>
-        </div>
       </div>
     )
   }

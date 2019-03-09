@@ -4,7 +4,6 @@ import './index.css';
 
 class SubjectPage extends Component {
   render() {
-
     return (
       <div>
         <h1>{this.props.match.params.subject.charAt(0).toUpperCase() + this.props.match.params.subject.slice(1)} Page</h1>

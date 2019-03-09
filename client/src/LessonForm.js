@@ -17,7 +17,7 @@ class LessonForm extends Component {
     lessonSource: '',
     lessonGrade: '',
     lessonSubject: 'science',
-    lessonGrade: 'pre-k'
+    lessonGrade: 'pre-k',
   }
 
     handleOnChange(e){
@@ -50,74 +50,69 @@ class LessonForm extends Component {
       lessonSubject: '',
       lessonGrade: ''
     })
-    }
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        this.setState({ validated: true });
+      }
+
+
 
   handleDelete = (id) => {
     this.props.deleteLesson(id)
   }
 
   render() {
+    const { validated } = this.state;
     return (
       <div>
-
-      {/* <div className='lessons'>
-        <Row>
-          <Col md={12}>
-              <div className='header'>
-                    {this.props.lessons.map(lesson => (
-                      <div>
-                        <p>Lesson Title: <Link to={`/lessons/${lesson.id}`}>{lesson.title}</Link></p>
-                        <Button
-                          onClick={()=>this.handleDelete(lesson.id)}>x</Button>
-                      </div>)
-                    )}
-              </div>
-            </Col>
-          </Row>
-        </div> */}
-
-
 
         <div className="lesson-form">
           <Row>
             <Col>
-              <form
-                onSubmit={(event)=>  this.handleLessonSubmit(event)}
-                className='new-lesson-form'>
+              <Form
+                  onSubmit={(event)=>  this.handleLessonSubmit(event)}
+                  className='new-lesson-form'>
 
-                <div className='form-group center-block' >
+                <Form.Group controlId="formHorizontalTitle" >
                   <input
                     type='text'
                     placeholder='Lesson Name'
                     name='lessonTitle'
                     onChange={(i)=> {this.handleOnChange(i)}}
-                    value={this.state.lessonTitle}></input>
-                </div>
-                <div className='form-group'>
+                    value={this.state.lessonTitle}
+                    required></input>
+                  </Form.Group>
+                <Form.Group controlId="formHorizontalDescription">
                   <input
                     type='text'
                     placeholder='Lesson Description'
                     name='lessonDescription'
                     onChange={(i)=> {this.handleOnChange(i)}}
-                    value={this.state.lessonDescription}></input>
-                </div>
-                <div className='form-group'>
-                  <input
+                    value={this.state.lessonDescription}
+                    required></input>
+                </Form.Group>
+                <Form.Group controlId="formHorizontalBody">
+                  <textarea
                     type='text'
                     placeholder='Lesson Body'
                     name='lessonBody'
                     onChange={(i)=> {this.handleOnChange(i)}}
-                    value={this.state.lessonBody}></input>
-                </div>
-                <div className='form-group'>
+                    value={this.state.lessonBody}
+                    required></textarea>
+                </Form.Group>
+                <Form.Group controlId="formHorizontalTeacher">
                   <input
                     type='text'
-                    placeholder='Lesson Source'
+                    placeholder='Teacher Name'
                     name='lessonSource'
                     onChange={(i)=> {this.handleOnChange(i)}}
-                    value={this.state.lessonSource}></input>
-                </div>
-                <div className='form-group'>
+                    value={this.state.lessonSource}
+                    required></input>
+                </Form.Group>
+                <Form.Group controlId="formDropdownLessonSubject">
                   <select name='lessonSubject' value={this.state.lessonSubject} onChange={(i)=> {this.handleOnChange(i)}}>
                     <option value="science">Science</option>
                     <option value="math">Math</option>
@@ -126,9 +121,9 @@ class LessonForm extends Component {
                     <option value="history">History</option>
                     <option value="music">Music</option>
                   </select>
-                </div>
+                </Form.Group>
 
-                <div className='form-group'>
+                <Form.Group controlId="formDropdownLessonGrade">
                   <select name='lessonGrade' value={this.state.lessonGrade} onChange={(i)=> {this.handleOnChange(i)}}>
                     <option value="pre-k">pre-k</option>
                     <option value="K">K</option>
@@ -145,12 +140,13 @@ class LessonForm extends Component {
                     <option value="11">11</option>
                     <option value="12">12</option>
                   </select>
-                </div>
+                </Form.Group>
 
-                <div className='submit-button' >
-                  <Button type='submit' variant="outline-dark"> Submit </Button>
-                </div>
-              </form>
+
+                  <div className='submit-button' >
+                    <Button type='submit' variant="outline-dark"> Submit </Button>
+                  </div>
+              </Form>
 
           </Col>
         </Row>

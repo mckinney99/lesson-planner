@@ -8,6 +8,7 @@ import SubjectPage from './SubjectPage'
 import Lessons from './Lessons'
 import Navbar from './Navbar'
 import GradePage from './GradePage'
+import TeacherPage from './TeacherPage'
 import NotFound from './NotFound'
 import { getLessons} from './actions'
 
@@ -26,6 +27,7 @@ class App extends Component {
           <Route path='/lessons/:subject' component={SubjectPage} />
           <Route path='/lessons/:id' component={LessonShow} />
           <Route path='/lessons' component={Lessons} />
+          <Route path='/teachers/:teacher' component={TeacherPage} />
 
           <Route component={NotFound} />
         </Switch>
