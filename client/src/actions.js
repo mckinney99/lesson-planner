@@ -8,8 +8,6 @@ export const getLessons = () => dispatch => {
       //console.log(lessonsArrayFromServer)
       dispatch({type: 'GET_LESSONS', payload: lessonsArrayFromServer})
     })
-
-  //when data is received, dispatch a new type to the reducer to update the redux store
 }
 
 export const createLesson = (lesson) => dispatch => {

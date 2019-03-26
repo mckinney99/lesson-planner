@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import './index.css';
+import '../index.css';
 import {Nav, Navbar, NavDropdown, Col, Row, Container, Button, Form, DropdownButton, Dropdown} from 'react-bootstrap'
 // import { LinkContainer } from 'react-router-bootstrap';
-import LessonForm from './LessonForm';
+import LessonForm from '../containers/LessonForm';
 import { Link } from 'react-router-dom'
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 
@@ -27,12 +27,12 @@ class Navigation extends Component {
 
 
           <NavDropdown title="Subjects" id="basic-nav-dropdown">
-            <LinkContainer to="/lessons/science"><NavDropdown.Item >Science</NavDropdown.Item></LinkContainer>
-            <LinkContainer to="/lessons/math"><NavDropdown.Item>Math</NavDropdown.Item></LinkContainer>
-            <LinkContainer to="/lessons/art"><NavDropdown.Item>Art</NavDropdown.Item></LinkContainer>
-            <LinkContainer to="/lessons/english"><NavDropdown.Item>English</NavDropdown.Item></LinkContainer>
-            <LinkContainer to="/lessons/history"><NavDropdown.Item>History</NavDropdown.Item></LinkContainer>
-            <LinkContainer to="/lessons/music"><NavDropdown.Item>Music</NavDropdown.Item></LinkContainer>
+            <LinkContainer to="/subjects/science"><NavDropdown.Item >Science</NavDropdown.Item></LinkContainer>
+            <LinkContainer to="/subjects/math"><NavDropdown.Item>Math</NavDropdown.Item></LinkContainer>
+            <LinkContainer to="/subjects/art"><NavDropdown.Item>Art</NavDropdown.Item></LinkContainer>
+            <LinkContainer to="/subjects/english"><NavDropdown.Item>English</NavDropdown.Item></LinkContainer>
+            <LinkContainer to="/subjects/history"><NavDropdown.Item>History</NavDropdown.Item></LinkContainer>
+            <LinkContainer to="/subjects/music"><NavDropdown.Item>Music</NavDropdown.Item></LinkContainer>
           </NavDropdown>
           <NavDropdown title="Grades" id="basic-nav-dropdown">
             <LinkContainer to="/grades/pre-k"><NavDropdown.Item>Pre-K</NavDropdown.Item></LinkContainer>

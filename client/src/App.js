@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Home from './Home'
+import Home from './components/Home'
 import LessonShow from './containers/LessonShow'
-import LessonForm from './LessonForm'
-import SubjectPage from './SubjectPage'
-import Lessons from './Lessons'
-import Navbar from './Navbar'
-import GradePage from './GradePage'
-import TeacherPage from './TeacherPage'
-import NotFound from './NotFound'
+import LessonForm from './containers/LessonForm'
+import SubjectPage from './containers/SubjectPage'
+import Lessons from './containers/Lessons'
+import Navbar from './components/Navbar'
+import GradePage from './containers/GradePage'
+import TeacherPage from './containers/TeacherPage'
+import NotFound from './components/NotFound'
 import { getLessons} from './actions'
 
 class App extends Component {
@@ -24,8 +24,10 @@ class App extends Component {
           <Route path='/' exact component={Home} />
           <Route path='/grades/:grade' component={GradePage} />
           <Route path='/lessons/new' component={LessonForm} />
-          <Route path='/lessons/:subject' component={SubjectPage} />
+
+          <Route path='/subjects/:subject' component={SubjectPage} />
           <Route path='/lessons/:id' component={LessonShow} />
+
           <Route path='/lessons' component={Lessons} />
           <Route path='/teachers/:teacher' component={TeacherPage} />
 

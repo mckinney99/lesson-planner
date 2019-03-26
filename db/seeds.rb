@@ -18,7 +18,9 @@ Lesson.create(
   title: "lesson title2",
   description: "7th grade paper paint",
   body: "paint on paper. woo!",
-  source: "Mr. Anderson"
+  source: "Mr. Anderson",
+  subject: "science",
+  grade: '11'
 )
 
 # my_lesson.user_lessons.create(user_id: 1)
