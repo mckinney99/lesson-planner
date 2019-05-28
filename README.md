@@ -6,7 +6,9 @@ Simply create a lesson plan using the built in form, and select the grade and su
 
 GETTING STARTED:
 
-run 'npm install'
+run 'yarn build'
+
+run 'rails db:migrate'
 
 run 'rake start'
 
