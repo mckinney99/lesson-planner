@@ -1,4 +1,4 @@
 [build]
 base = "lesson-planner/"
 publish = "lesson-planner/build/"
-command = "npm build"
+command = "yarn build"
