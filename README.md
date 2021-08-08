@@ -14,7 +14,7 @@ run 'rails db:migrate'
 
 run 'rake start'
 
-////////////
+/////////////
 
 Please file any issues with a pull request. Thank you!
 
